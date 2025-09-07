@@ -1,32 +1,21 @@
 use std::io;
-use std::cmp::Ordering;
-use rand::Rng;
 
-
-fn print_type_of<T>(_: T) -> (&'static str, &'static str) {
-    ("{}", std::any::type_name::<T>())
+fn reply_greeting(name: &str) {
+    println!("Hello, {}! how are you?", name);
+} 
+fn ask_name() -> String {
+    println!("What is your name?");
+    let mut name = String::new();
+    io::stdin().read_line(&mut name).expect("Failed to read line");
+    name.trim().to_string()
+}
+fn change_name(name: &mut String) {
+    name.push_str(" Smith");
 }
 
 fn main() {
-    guessing_game();
-}
-
-fn guessing_game() {
-    println!("Guess the number!");
-    let secret_number: i32 = rand::thread_rng().gen_range(1, 101);
-    println!("the secret number is: {}", secret_number);
-
-    let mut guess = String::new();
-    io::stdin().read_line(&mut guess).expect("Failed to read line");
-    let guess: i32 = guess.trim().parse().expect("Please type a number!");
-
-    println!("You guessed: {}", guess);
-
-    match guess.cmp(&secret_number) {
-        Ordering::Less => println!("Too small!"),
-        Ordering::Greater => println!("Too big!"),
-        Ordering::Equal => println!("You win!"),
-    }
-
-    println!("the type is {:?}", print_type_of(guess));
+    let mut user_name = ask_name();
+    reply_greeting(&user_name);
+    change_name(&mut user_name);
+    reply_greeting(&user_name);
 }

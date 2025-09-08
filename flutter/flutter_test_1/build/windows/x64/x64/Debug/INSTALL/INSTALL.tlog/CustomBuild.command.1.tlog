@@ -1,0 +1,10 @@
+^C:\USERS\FRANC\ONEDRIVE\DOKUMENTE\DEV\RUSTTUTORIAL\FLUTTER\FLUTTER_TEST_1\BUILD\WINDOWS\X64\CMAKEFILES\646DDD7DF4002146CC7E9DC2D085A427\INSTALL_FORCE.RULE
+setlocal
+cd .
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
